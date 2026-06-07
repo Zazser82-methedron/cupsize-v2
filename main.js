@@ -315,39 +315,44 @@ function karaokeFrame() {
   if (!karaokeMode || !currentTrack) return;
   karaokeRafId = requestAnimationFrame(karaokeFrame);
 
-  if (!sound) return;
-  const pos = sound.seek();
-  if (typeof pos !== 'number') return;
+  if (!howl) return;
+  const pos = howl.seek();
+  if (typeof pos !== 'number' || karaokeLines.length === 0) return;
 
   let idx = -1;
   for (let i = 0; i < karaokeLines.length; i++) {
     if (karaokeLines[i].time <= pos) idx = i; else break;
   }
-  if (idx === kPrevIdx) return;
-  kPrevIdx = idx;
 
-  if (idx < 0) { lyricsPanel.innerHTML = ''; return; }
+  if (idx < 0) return;
 
-  const cur = karaokeLines[idx];
-  const nextTime = karaokeLines[idx + 1] ? karaokeLines[idx + 1].time : cur.time + 8;
-  const lineDur = Math.max(nextTime - cur.time, 0.5);
-  const words = cur.text.split(' ');
-
-  let html = '';
-  for (let i = Math.max(0, idx - 2); i < idx; i++)
-    html += '<p class="kline kline-prev">' + karaokeLines[i].text + '</p>';
-
+  const cur     = karaokeLines[idx];
+  const nextT   = karaokeLines[idx + 1] ? karaokeLines[idx + 1].time : cur.time + 8;
+  const lineDur = Math.max(nextT - cur.time, 0.5);
+  const words   = cur.text.split(' ');
   const elapsed = pos - cur.time;
-  const wIdx = Math.floor((elapsed / lineDur) * words.length);
-  const wordsHtml = words.map((w, i) =>
-    '<span class="kword' + (i <= wIdx ? ' kword-sung' : '') + '">' + w + '</span>'
-  ).join(' ');
-  html += '<p class="kline kline-cur">' + wordsHtml + '</p>';
+  const wIdx    = Math.min(Math.floor((elapsed / lineDur) * words.length), words.length - 1);
 
-  for (let i = idx + 1; i < Math.min(karaokeLines.length, idx + 4); i++)
-    html += '<p class="kline kline-next">' + karaokeLines[i].text + '</p>';
+  // Rebuild HTML only when line changes; update word spans every frame
+  if (idx !== kPrevIdx) {
+    kPrevIdx = idx;
+    let html = '';
+    for (let i = Math.max(0, idx - 2); i < idx; i++)
+      html += '<p class="kline kline-prev">' + karaokeLines[i].text + '</p>';
+    html += '<p class="kline kline-cur" id="kCurLine">'
+      + words.map(w => '<span class="kword">' + w + '</span>').join(' ')
+      + '</p>';
+    for (let i = idx + 1; i < Math.min(karaokeLines.length, idx + 4); i++)
+      html += '<p class="kline kline-next">' + karaokeLines[i].text + '</p>';
+    lyricsPanel.innerHTML = html;
+  }
 
-  lyricsPanel.innerHTML = html;
+  // Highlight words in current line every frame
+  const curLine = document.getElementById('kCurLine');
+  if (curLine) {
+    const spans = curLine.querySelectorAll('.kword');
+    spans.forEach((s, i) => s.classList.toggle('kword-sung', i <= wIdx));
+  }
 }
 
 function startKaraoke(trackN) {
