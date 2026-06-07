@@ -6,7 +6,7 @@
 <title>Cupsize — заставь меня плакать</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;700&family=Caveat+Brush&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=14">
+<link rel="stylesheet" href="style.css?v=15">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.4/howler.min.js"></script>
 </head>
 <body>
@@ -31,6 +31,39 @@
     </filter>
   </defs>
 </svg>
+
+<!-- ФОНОВЫЕ ФОТО -->
+<div class="bg-wrap bg-anim-float"
+     style="width:340px; bottom:-30px; right:-22px; --rot:-6deg;"
+     onclick="openLightbox('images/bg-chick.jpg')">
+  <img src="images/bg-chick.jpg" style="width:100%; opacity:0.22;" alt="">
+</div>
+<div class="bg-wrap bg-anim-sway"
+     style="width:300px; top:-12px; left:-22px; --rot:5deg;"
+     onclick="openLightbox('images/bg-mushroom.jpg')">
+  <img src="images/bg-mushroom.jpg" style="width:100%; opacity:0.18;" alt="">
+</div>
+<div class="bg-wrap bg-anim-drift"
+     style="width:280px; top:5px; right:-18px; --rot:-3deg;"
+     onclick="openLightbox('images/bg-rabbits.jpg')">
+  <img src="images/bg-rabbits.jpg" style="width:100%; opacity:0.15;" alt="">
+</div>
+<div class="bg-wrap bg-anim-float-r"
+     style="width:290px; bottom:30px; left:-28px; --rot:4deg;"
+     onclick="openLightbox('images/bg-cat.jpg')">
+  <img src="images/bg-cat.jpg" style="width:100%; opacity:0.13;" alt="">
+</div>
+<div class="bg-wrap bg-anim-pulse"
+     style="width:260px; top:32%; left:50%; margin-left:-130px; --rot:-5deg;"
+     onclick="openLightbox('images/bg-collage.jpg')">
+  <img src="images/bg-collage.jpg" style="width:100%; opacity:0.09;" alt="">
+</div>
+
+<!-- ЛАЙТБОКС -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <span class="lightbox-close" onclick="closeLightbox()">✕</span>
+  <img id="lightboxImg" src="" alt="">
+</div>
 
 <!-- ═══════════════════════════════
      СТРАНИЦА 0 — age gate
@@ -200,6 +233,6 @@ body.glitch::after { background: #4af; animation-delay: -0.07s; mix-blend-mode: 
 
 <script src="lyrics.js?v=2"></script>
 <script src="karaoke.js?v=2"></script>
-<script src="main.js?v=14"></script>
+<script src="main.js?v=15"></script>
 </body>
 </html>

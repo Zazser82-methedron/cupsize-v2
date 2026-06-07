@@ -82,6 +82,17 @@ const playerInner = document.getElementById('playerInner');
 const pMood   = document.getElementById('pMood');
 const pYtLink = document.getElementById('pYtLink');
 
+// ─── Лайтбокс для фоновых фото ───────────────────────────────────────────────
+function openLightbox(src) {
+  const lb = document.getElementById('lightbox');
+  document.getElementById('lightboxImg').src = src;
+  lb.classList.add('open');
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
 // ─── Состояние ───────────────────────────────────────────────────────────────
 let tears = +(localStorage.getItem('zmp_tears')||0);
 let currentTrack = null;
@@ -890,26 +901,43 @@ function notebook(){
 
 function head(){
   const W=cW(),H=cH();
+  // Звёзды (как в ZMP2): 5 штук на орбите вокруг головы
+  const starPos=[0,Math.PI*0.4,Math.PI*0.8,Math.PI*1.2,Math.PI*1.6];
+  function drawStar(x,y,r){
+    ctx.beginPath();
+    for(let i=0;i<10;i++){
+      const a=(i/10)*Math.PI*2-Math.PI/2, rv=i%2===0?r:r*0.42;
+      const px=x+Math.cos(a)*rv+(Math.random()-0.5)*1.2;
+      const py=y+Math.sin(a)*rv+(Math.random()-0.5)*1.2;
+      i===0?ctx.moveTo(px,py):ctx.lineTo(px,py);
+    }
+    ctx.closePath(); ctx.strokeStyle=INK; ctx.lineWidth=1.3; ctx.stroke();
+  }
   function f(){
     if(!animRunning)return; const t=Date.now()*0.001;
-    const shake=Math.sin(t*22)*5*Math.abs(Math.sin(t*3));
+    const shake=Math.sin(t*22)*4*Math.abs(Math.sin(t*3));
     ctx.clearRect(0,0,W,H); ctx.fillStyle=PAPER; ctx.fillRect(0,0,W,H);
-    ctx.strokeStyle='rgba(200,40,26,0.08)'; ctx.lineWidth=1;
-    for(let i=0;i<15;i++){
-      const a=(i/15)*Math.PI*2+t*0.4, r=W*(0.28+0.15*Math.abs(Math.sin(t*2+i)));
-      sketchLine(W/2,H/2,W/2+Math.cos(a)*r,H/2+Math.sin(a)*r,2);
-    }
-    const cx=W/2+shake,cy=H*0.44,r=W*0.22;
+    const cx=W/2+shake, cy=H*0.44, r=W*0.22;
+    // Орбитальные звёзды
+    const orb=r*1.55;
+    starPos.forEach((a0,i)=>{
+      const a=a0+t*0.7, sx=cx+Math.cos(a)*orb, sy=cy+Math.sin(a)*orb;
+      ctx.globalAlpha=0.85; drawStar(sx,sy,9+Math.sin(t*1.3+i)*2.5); ctx.globalAlpha=1;
+    });
+    // Голова
     ctx.strokeStyle=INK; ctx.lineWidth=2; sketchCircle(cx,cy,r,1.5);
-    for(let i=0;i<6;i++){const hx=cx-r*0.5+i*(r*0.2);sketchLine(hx,cy-r*0.85,hx+8,cy-r*1.1+Math.sin(i*1.2)*5,1);}
+    // Волосы
+    for(let i=0;i<6;i++){const hx=cx-r*0.5+i*(r*0.2); sketchLine(hx,cy-r*0.85,hx+7,cy-r*1.1+Math.sin(i*1.2)*5,1);}
+    // Глаза
     const eo=r*0.3;
     for(const ex of[-1,1]){
       sketchCircle(cx+ex*eo,cy-r*0.1,r*0.1,1);
-      ctx.beginPath(); ctx.arc(cx+ex*eo+Math.cos(t*9)*r*0.04,cy-r*0.1+Math.sin(t*9)*r*0.04,r*0.04,0,Math.PI*2);
+      ctx.beginPath(); ctx.arc(cx+ex*eo+Math.cos(t*8)*r*0.04,cy-r*0.1+Math.sin(t*8)*r*0.04,r*0.04,0,Math.PI*2);
       ctx.fillStyle=RED; ctx.fill();
     }
+    // Рот зигзагом
     ctx.strokeStyle=INK; ctx.lineWidth=1.5; ctx.beginPath();
-    for(let i=0;i<=6;i++){const mx=cx-r*0.28+i*(r*0.09)+shake*0.3,my=cy+r*0.35+(i%2===0?0:5);if(i===0)ctx.moveTo(mx,my);else ctx.lineTo(mx,my);}
+    for(let i=0;i<=6;i++){const mx=cx-r*0.28+i*(r*0.09)+shake*0.3,my=cy+r*0.35+(i%2===0?0:5); i===0?ctx.moveTo(mx,my):ctx.lineTo(mx,my);}
     ctx.stroke();
     rafId=requestAnimationFrame(f);
   }f();
@@ -1345,7 +1373,9 @@ function chaos(){
 
 function jump(){
   const W=cW(),H=cH();
-  const petals=Array.from({length:32},()=>({x:rnd(0,W),y:rnd(H*0.3,H),vx:rnd(-1.8,1.8),vy:rnd(-2.2,-0.4),rot:rnd(0,Math.PI*2),rs:rnd(-0.09,0.09),alpha:rnd(0.3,0.9),size:rnd(4,11)}));
+  const petals=Array.from({length:28},()=>({x:rnd(0,W),y:rnd(H*0.3,H),vx:rnd(-1.8,1.8),vy:rnd(-2.2,-0.4),rot:rnd(0,Math.PI*2),rs:rnd(-0.09,0.09),alpha:rnd(0.3,0.9),size:rnd(4,11)}));
+  // Красный шарик (концепция ZMP2) — дрейфует вверх и по кругу
+  let ballX=W*0.72, ballY=H*0.38;
   function f(){
     if(!animRunning)return; const t=Date.now()*0.001;
     ctx.clearRect(0,0,W,H);
@@ -1357,6 +1387,7 @@ function jump(){
     ctx.fillStyle='#060410';ctx.fillRect(0,gy,W*0.42,H);
     ctx.fillStyle='#05030e';ctx.fillRect(W*0.42,H*0.3,W*0.2,gy-H*0.3);
     for(let ww=0;ww<5;ww++){const wy=H*(0.34+ww*0.07)+Math.sin(t*1.8+ww)*5;ctx.strokeStyle='rgba(220,150,240,0.18)';ctx.lineWidth=1;sketchLine(W*0.08,wy,W*0.42,wy+Math.sin(t+ww)*6,0.5);}
+    // Фигура на краю обрыва
     const edge=W*0.52,edgeY=gy-1,s=W*0.067,armRaise=Math.sin(t*1.6)*0.32,lean=Math.sin(t*0.65)*0.08;
     ctx.save();ctx.translate(edge,edgeY);ctx.rotate(lean);
     ctx.strokeStyle='rgba(235,215,245,0.92)';ctx.lineWidth=2;
@@ -1366,6 +1397,15 @@ function jump(){
     sketchLine(0,-s*0.85,s*1.85,-s*0.18-armRaise*s*0.6,1);
     sketchLine(0,s*0.45,-s*0.88,s*1.88,1);sketchLine(0,s*0.45,s*0.88,s*1.88,1);
     ctx.restore();
+    // Красный шарик (уплывает вверх, как в ZMP2)
+    const bx=W*0.72+Math.sin(t*0.8)*18, by=H*0.36-((t*14)%H);
+    const bry=H*0.72; // нитка от фигуры к шарику (только когда шарик над фигурой)
+    ctx.strokeStyle=RED; ctx.lineWidth=1.5;
+    ctx.beginPath(); ctx.ellipse(bx, by, 18, 22, 0, 0, Math.PI*2); ctx.stroke();
+    // Нитка
+    ctx.strokeStyle='rgba(200,40,26,0.55)'; ctx.lineWidth=1;
+    sketchLine(bx, by+22, edge+s*1.2, gy, 1.5);
+    // Лепестки
     petals.forEach(p=>{
       p.x+=p.vx+Math.sin(t*0.7+p.y*0.008)*1.3;p.y+=p.vy;p.rot+=p.rs;p.alpha-=0.003;
       if(p.y<-15||p.alpha<=0){p.y=H*0.92;p.x=rnd(0,W);p.alpha=rnd(0.35,0.9);p.vy=rnd(-2.2,-0.4);}
