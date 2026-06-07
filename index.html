@@ -6,7 +6,7 @@
 <title>Cupsize — заставь меня плакать</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;700&family=Caveat+Brush&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=10">
+<link rel="stylesheet" href="style.css?v=11">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.4/howler.min.js"></script>
 </head>
 <body>
@@ -126,17 +126,18 @@
       <span class="p-vol-icon">♪</span>
       <input type="range" class="p-vol-slider" id="pVolSlider" min="0" max="1" step="0.01" value="0.85">
     </div>
-    <!-- Переключатель вида (анимация / клип / текст / каráoke) -->
+    <!-- Переключатель вида -->
     <div class="p-view-toggle visible" id="pViewToggle">
       <button class="p-view-btn active" id="btnAnim">≈ аним</button>
       <button class="p-view-btn" id="btnVideo">▶ клип</button>
       <button class="p-view-btn" id="btnLyrics">✎ текст</button>
-      <button class="p-view-btn" id="btnKaraoke">♩ кар.</button>
     </div>
-    <!-- Анимация + YouTube + Текст -->
-    <div class="p-stage" id="pStage">
-      <canvas id="animCanvas"></canvas>
-      <div class="yt-wrap" id="ytWrap"></div>
+    <!-- Строка: анимация + текст рядом -->
+    <div class="p-stage-row" id="pStageRow">
+      <div class="p-stage" id="pStage">
+        <canvas id="animCanvas"></canvas>
+        <div class="yt-wrap" id="ytWrap"></div>
+      </div>
       <div class="lyrics-panel" id="lyricsPanel"></div>
     </div>
     <!-- Прогресс -->
@@ -201,6 +202,6 @@ body.glitch::after { background: #4af; animation-delay: -0.07s; mix-blend-mode: 
 
 <script src="lyrics.js?v=2"></script>
 <script src="karaoke.js?v=1"></script>
-<script src="main.js?v=10"></script>
+<script src="main.js?v=11"></script>
 </body>
 </html>

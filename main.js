@@ -76,9 +76,9 @@ const pViewToggle = document.getElementById('pViewToggle');
 const btnAnim    = document.getElementById('btnAnim');
 const btnVideo   = document.getElementById('btnVideo');
 const btnLyrics  = document.getElementById('btnLyrics');
-const btnKaraoke = document.getElementById('btnKaraoke');
 const ytWrap     = document.getElementById('ytWrap');
 const lyricsPanel = document.getElementById('lyricsPanel');
+const pStageRow   = document.getElementById('pStageRow');
 const pMood   = document.getElementById('pMood');
 const pYtLink = document.getElementById('pYtLink');
 
@@ -90,7 +90,8 @@ let rafId = null;
 let zonesBuilt = false;
 let loopMode = false;
 let ytMode = false;
-let karaokeMode = false;
+// lyricsState: 0=off  1=static  2=karaoke
+let lyricsState = 0;
 let karaokeLines = [];
 let karaokeRafId = null;
 let kPrevIdx = -1;
@@ -310,60 +311,80 @@ function parseLRC(str) {
     .filter(l => l && l.text);
 }
 
-// ─── Каráoke RAF ──────────────────────────────────────────────────────────────
-function karaokeFrame() {
-  if (!karaokeMode || !currentTrack) return;
-  karaokeRafId = requestAnimationFrame(karaokeFrame);
+// ─── Высота панели = высота stage ─────────────────────────────────────────────
+function syncLyricsPanelHeight() {
+  const h = pStage.clientHeight;
+  if (h > 0) lyricsPanel.style.height = h + 'px';
+}
 
-  if (!howl) return;
-  const pos = howl.seek();
-  if (typeof pos !== 'number' || karaokeLines.length === 0) return;
+// ─── Статичный текст ──────────────────────────────────────────────────────────
+function showStaticLyrics(trackN) {
+  const raw = (typeof LYRICS !== 'undefined' && LYRICS[trackN]) || null;
+  lyricsPanel.innerHTML = raw
+    ? raw.split('\n').map(l =>
+        l ? '<p class="lyr-line">' + l + '</p>'
+          : '<span class="lyr-gap"></span>'
+      ).join('')
+    : '<p class="no-lyrics">текст не найден</p>';
+  lyricsPanel.scrollTop = 0;
+}
 
+// ─── Каraоке: строим DOM один раз ────────────────────────────────────────────
+function buildKaraokeDOM(lines) {
+  lyricsPanel.innerHTML = lines.map((line, i) =>
+    '<p class="kline kline-future" data-time="' + line.time + '" data-idx="' + i + '">' +
+    line.text + '</p>'
+  ).join('');
+  lyricsPanel.scrollTop = 0;
+
+  lyricsPanel.querySelectorAll('.kline').forEach(el => {
+    el.addEventListener('click', () => {
+      if (howl) { howl.seek(parseFloat(el.dataset.time)); kPrevIdx = -1; }
+    });
+  });
+}
+
+// ─── Каraоке: обновляем подсветку строк ──────────────────────────────────────
+function updateKaraokeHighlight(pos) {
   let idx = -1;
   for (let i = 0; i < karaokeLines.length; i++) {
     if (karaokeLines[i].time <= pos) idx = i; else break;
   }
+  if (idx === kPrevIdx) return;
+  kPrevIdx = idx;
 
-  if (idx < 0) return;
+  lyricsPanel.querySelectorAll('.kline').forEach((el, i) => {
+    el.className = 'kline ' + (i < idx ? 'kline-past' : i === idx ? 'kline-cur' : 'kline-future');
+  });
 
-  const cur     = karaokeLines[idx];
-  const nextT   = karaokeLines[idx + 1] ? karaokeLines[idx + 1].time : cur.time + 8;
-  const lineDur = Math.max(nextT - cur.time, 0.5);
-  const words   = cur.text.split(' ');
-  const elapsed = pos - cur.time;
-  const wIdx    = Math.min(Math.floor((elapsed / lineDur) * words.length), words.length - 1);
-
-  // Rebuild HTML only when line changes; update word spans every frame
-  if (idx !== kPrevIdx) {
-    kPrevIdx = idx;
-    let html = '';
-    for (let i = Math.max(0, idx - 2); i < idx; i++)
-      html += '<p class="kline kline-prev">' + karaokeLines[i].text + '</p>';
-    html += '<p class="kline kline-cur" id="kCurLine">'
-      + words.map(w => '<span class="kword">' + w + '</span>').join(' ')
-      + '</p>';
-    for (let i = idx + 1; i < Math.min(karaokeLines.length, idx + 4); i++)
-      html += '<p class="kline kline-next">' + karaokeLines[i].text + '</p>';
-    lyricsPanel.innerHTML = html;
+  if (idx >= 0) {
+    const el = lyricsPanel.querySelectorAll('.kline')[idx];
+    if (el) {
+      const top = el.offsetTop - lyricsPanel.clientHeight / 2 + el.clientHeight / 2;
+      lyricsPanel.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+    }
   }
+}
 
-  // Highlight words in current line every frame
-  const curLine = document.getElementById('kCurLine');
-  if (curLine) {
-    const spans = curLine.querySelectorAll('.kword');
-    spans.forEach((s, i) => s.classList.toggle('kword-sung', i <= wIdx));
-  }
+// ─── Каraоке RAF ─────────────────────────────────────────────────────────────
+function karaokeFrame() {
+  if (lyricsState !== 2 || !currentTrack) return;
+  karaokeRafId = requestAnimationFrame(karaokeFrame);
+  if (!howl || karaokeLines.length === 0) return;
+  const pos = howl.seek();
+  if (typeof pos === 'number') updateKaraokeHighlight(pos);
 }
 
 function startKaraoke(trackN) {
   stopKaraoke();
   const lrc = (typeof KARAOKE !== 'undefined') && KARAOKE[trackN];
   if (!lrc) {
-    lyricsPanel.innerHTML = '<p class="kline kline-cur" style="font-size:14px;opacity:.5">каráoke недоступно</p>';
+    lyricsPanel.innerHTML = '<p class="no-lyrics">каráoke недоступно</p>';
     return;
   }
   karaokeLines = parseLRC(lrc);
   kPrevIdx = -1;
+  buildKaraokeDOM(karaokeLines);
   karaokeRafId = requestAnimationFrame(karaokeFrame);
 }
 
@@ -374,37 +395,30 @@ function stopKaraoke() {
 }
 
 // ─── Переключатель вида ───────────────────────────────────────────────────────
+// mode: 'anim' | 'yt' | 'lyrics' | 'karaoke'
 function setView(mode) {
-  ytMode     = (mode === 'yt');
-  karaokeMode = (mode === 'karaoke');
-  const isLyrics  = (mode === 'lyrics');
-  const isAnim    = !ytMode && !isLyrics && !karaokeMode;
+  ytMode = (mode === 'yt');
+  lyricsState = mode === 'lyrics' ? 1 : mode === 'karaoke' ? 2 : 0;
+  const hasText = lyricsState > 0;
 
-  // Canvas: видим в аним + каráoke (анимация за текстом)
-  canvas.style.display = (isAnim || karaokeMode) ? 'block' : 'none';
+  // Анимация всегда видна (кроме режима клипа)
+  canvas.style.display = ytMode ? 'none' : 'block';
   ytWrap.classList.toggle('active', ytMode);
 
-  lyricsPanel.classList.toggle('active', isLyrics || karaokeMode);
-  lyricsPanel.classList.toggle('karaoke', karaokeMode);
+  // Раскрыть/закрыть текстовую панель
+  lyricsPanel.classList.toggle('active', hasText);
+  overlay.querySelector('.player-inner').classList.toggle('has-lyrics', hasText && !ytMode);
 
-  btnAnim.classList.toggle('active',    isAnim);
-  btnVideo.classList.toggle('active',   ytMode);
-  btnLyrics.classList.toggle('active',  isLyrics);
-  btnKaraoke.classList.toggle('active', karaokeMode);
+  if (hasText && !ytMode) syncLyricsPanelHeight();
 
-  if (karaokeMode && currentTrack) {
-    startKaraoke(currentTrack.n);
-  } else {
-    stopKaraoke();
-    if (isLyrics && currentTrack) showStaticLyrics(currentTrack.n);
-  }
-}
+  btnAnim.classList.toggle('active',   mode === 'anim');
+  btnVideo.classList.toggle('active',  ytMode);
+  btnLyrics.classList.toggle('active', hasText);
+  btnLyrics.textContent = lyricsState === 2 ? '♩ кар.' : '✎ текст';
 
-function showStaticLyrics(trackN) {
-  const raw = (typeof LYRICS !== 'undefined' && LYRICS[trackN]) || null;
-  lyricsPanel.innerHTML = raw
-    ? raw.split('\n').map(l => l ? '<p>' + l + '</p>' : '<br>').join('')
-    : '<p class="no-lyrics">текст не найден</p>';
+  stopKaraoke();
+  if (lyricsState === 1 && currentTrack) showStaticLyrics(currentTrack.n);
+  if (lyricsState === 2 && currentTrack) startKaraoke(currentTrack.n);
 }
 
 function loadYT(videoId) {
@@ -426,16 +440,15 @@ function loadTikTok(videoId) {
 btnAnim.addEventListener('click', () => setView('anim'));
 btnVideo.addEventListener('click', () => {
   if (!currentTrack) return;
-  if (currentTrack.tiktok) {
-    loadTikTok(currentTrack.tiktok);
-    setView('yt');
-  } else if (currentTrack.youtube) {
-    loadYT(currentTrack.youtube);
-    setView('yt');
-  }
+  if (currentTrack.tiktok) { loadTikTok(currentTrack.tiktok); setView('yt'); }
+  else if (currentTrack.youtube) { loadYT(currentTrack.youtube); setView('yt'); }
 });
-btnLyrics.addEventListener('click',   () => setView('lyrics'));
-btnKaraoke.addEventListener('click',  () => setView('karaoke'));
+// Цикл: аним→текст→каráoke→аним
+btnLyrics.addEventListener('click', () => {
+  if (lyricsState === 0) setView('lyrics');
+  else if (lyricsState === 1) setView('karaoke');
+  else setView('anim');
+});
 
 // ─── Открыть трек ─────────────────────────────────────────────────────────────
 function openTrack(t) {
@@ -446,8 +459,9 @@ function openTrack(t) {
   const idx = TRACKS.indexOf(t);
   pCounter.textContent = (idx+1) + ' / ' + TRACKS.length;
 
-  // Lyrics (populate for static mode; karaoke reloads on its own)
-  if (!karaokeMode) showStaticLyrics(t.n);
+  // Текст: обновить при смене трека
+  if (lyricsState === 1) showStaticLyrics(t.n);
+  if (lyricsState === 2) startKaraoke(t.n);
 
   // YouTube / TikTok ссылка и кнопка клипа
   if (t.youtube || t.tiktok) {
@@ -492,6 +506,7 @@ function closePlayer() {
   animRunning = false;
   cancelAnimationFrame(rafId);
   stopKaraoke();
+  lyricsState = 0;
   document.querySelectorAll('.track-zone').forEach(z => z.classList.remove('playing'));
   currentTrack = null;
   stopAudio();
@@ -499,7 +514,14 @@ function closePlayer() {
   lyricsPanel.innerHTML = '';
   pYtLink.style.display = 'none';
   btnVideo.style.display = '';
-  setView('anim');
+  overlay.querySelector('.player-inner').classList.remove('has-lyrics');
+  lyricsPanel.classList.remove('active');
+  canvas.style.display = 'block';
+  ytWrap.classList.remove('active');
+  btnAnim.classList.add('active');
+  btnVideo.classList.remove('active');
+  btnLyrics.classList.remove('active');
+  btnLyrics.textContent = '✎ текст';
 }
 
 function prevTrack() {
