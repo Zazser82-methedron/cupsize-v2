@@ -333,10 +333,10 @@ body::before {
 
 /* Режим с текстом — раскладка в строку */
 .player-inner.has-lyrics {
-  width: min(940px, 95vw);
+  width: min(1080px, 96vw);
   flex-direction: row;
   align-items: stretch;
-  gap: 12px;
+  gap: 14px;
 }
 
 /* Левая колонка: контролы + анимация */
@@ -348,7 +348,7 @@ body::before {
   width: 100%;
 }
 .player-inner.has-lyrics .p-left-col {
-  width: min(430px, 46vw);
+  width: min(480px, 44vw);
 }
 
 /* Карандашный шейк — эффект держащей руки */
@@ -549,16 +549,17 @@ body::before {
   flex-direction: column;
   overflow-y: auto;
   overflow-x: hidden;
-  padding: 8px 8px 12px 14px;
+  padding: 10px 10px 16px 16px;
   font-family: var(--font);
-  font-size: 15px;
+  font-size: 16px;
   line-height: 1.65;
   color: var(--ink);
   background: transparent;
   scrollbar-width: thin;
   scrollbar-color: rgba(26,22,18,0.18) transparent;
   align-self: stretch;
-  border-left: 1.5px solid rgba(26,22,18,0.12);
+  border-left: 1.5px solid rgba(26,22,18,0.15);
+  transition: opacity 0.18s ease;
 }
 .lyrics-panel.active { display: flex; }
 
@@ -582,9 +583,9 @@ body::before {
   word-break: break-word;
 }
 .kline:hover { background: rgba(26,22,18,0.06); }
-.kline-past   { font-size: 14px; opacity: 0.3;  color: var(--ink); }
+.kline-past   { font-size: 15px; opacity: 0.25; color: var(--ink); }
 .kline-cur    { font-size: 20px; opacity: 1;    color: var(--ink); font-weight: 700; }
-.kline-future { font-size: 14px; opacity: 0.55; color: var(--ink); }
+.kline-future { font-size: 16px; opacity: 0.5;  color: var(--ink); }
 
 /* Мобильный: текст под анимацией */
 @media (max-width: 600px) {

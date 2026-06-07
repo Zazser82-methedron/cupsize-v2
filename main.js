@@ -410,8 +410,17 @@ function setView(mode) {
   btnLyrics.textContent = lyricsState === 2 ? '♩ кар.' : '✎ текст';
 
   stopKaraoke();
-  if (lyricsState === 1 && currentTrack) showStaticLyrics(currentTrack.n);
-  if (lyricsState === 2 && currentTrack) startKaraoke(currentTrack.n);
+  const panelWasVisible = lyricsPanel.classList.contains('active') && lyricsPanel.innerHTML;
+  const doContent = () => {
+    if (lyricsState === 1 && currentTrack) showStaticLyrics(currentTrack.n);
+    if (lyricsState === 2 && currentTrack) startKaraoke(currentTrack.n);
+  };
+  if (hasText && panelWasVisible) {
+    lyricsPanel.style.opacity = '0';
+    setTimeout(() => { doContent(); lyricsPanel.style.opacity = ''; }, 160);
+  } else {
+    doContent();
+  }
 }
 
 function loadYT(videoId) {
