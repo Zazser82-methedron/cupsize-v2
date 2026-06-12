@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Семенов Евгений — Менеджер по логистике и ВЭД</title>
+<meta name="description" content="Виртуальное резюме: Семенов Евгений Романович — менеджер по логистике и ВЭД, 31 год опыта, международные перевозки, таможенное оформление, управление автопарком." />
+<meta name="theme-color" content="#0e1116" />
+<meta property="og:title" content="Семенов Евгений — Менеджер по логистике и ВЭД" />
+<meta property="og:description" content="31 год в логистике и ВЭД · ЕС · ЕАЭС · СНГ · международные перевозки · таможня · управление автопарком" />
+<meta property="og:type" content="profile" />
+<link rel="icon" href="data:image/svg+xml,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'&gt;&lt;text y='.9em' font-size='90'&gt;🚛&lt;/text&gt;&lt;/svg&gt;" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ============ PROGRESS BAR ============ -->
+<div id="scroll-progress"></div>
+
+<!-- ============ HEADER ============ -->
+<header id="topbar">
+  <a class="brand" href="#hero" aria-label="Семенов Евгений">
+    <span class="brand-mono">ЕС</span>
+    <span class="brand-text">
+      <b data-ru="Семенов Евгений" data-en="Evgeny Semenov">Семенов Евгений</b>
+      <i data-ru="Логистика · ВЭД" data-en="Logistics · FEA">Логистика · ВЭД</i>
+    </span>
+  </a>
+  <nav class="nav">
+    <a href="#profile" data-ru="Профиль" data-en="Profile">Профиль</a>
+    <a href="#skills" data-ru="Навыки" data-en="Skills">Навыки</a>
+    <a href="#experience" data-ru="Опыт" data-en="Experience">Опыт</a>
+    <a href="#geography" data-ru="География" data-en="Geography">География</a>
+    <a href="#contact" data-ru="Контакты" data-en="Contacts">Контакты</a>
+  </nav>
+  <div class="topbar-actions">
+    <a class="btn btn-ghost btn-pdf" href="resume.pdf" download
+       data-ru="Скачать PDF" data-en="Download PDF">Скачать PDF</a>
+    <button id="lang-toggle" class="lang-toggle" type="button" aria-label="Сменить язык">
+      <span data-lang="ru">RU</span><span class="sep">/</span><span data-lang="en">EN</span>
+    </button>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section id="hero" class="hero has-photo" data-bg="hero-highway">
+  <div class="hero-overlay"></div>
+
+  <!-- animated road + truck -->
+  <div class="road" aria-hidden="true">
+    <div class="road-dashes"></div>
+    <div class="truck-wrap">
+      <!-- side-view semi truck -->
+      <svg class="truck" viewBox="0 0 340 150" role="img" aria-label="truck">
+        <defs>
+          <linearGradient id="trailerG" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#f4f6fb"/><stop offset="1" stop-color="#c7cedb"/>
+          </linearGradient>
+          <linearGradient id="cabG" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#ffc94d"/><stop offset="1" stop-color="#f4a01c"/>
+          </linearGradient>
+        </defs>
+        <!-- trailer -->
+        <rect x="6" y="26" width="200" height="74" rx="7" fill="url(#trailerG)" stroke="#9aa6bb" stroke-width="2"/>
+        <line x1="58" y1="28" x2="58" y2="98" stroke="#b3bccd" stroke-width="2"/>
+        <line x1="110" y1="28" x2="110" y2="98" stroke="#b3bccd" stroke-width="2"/>
+        <line x1="162" y1="28" x2="162" y2="98" stroke="#b3bccd" stroke-width="2"/>
+        <!-- cab -->
+        <path d="M214 44 h78 a10 10 0 0 1 10 10 l6 30 a8 8 0 0 1 -2 16 h-96 z" fill="url(#cabG)" stroke="#cf8a12" stroke-width="2"/>
+        <path d="M250 50 h36 a6 6 0 0 1 6 6 l4 22 h-46 z" fill="#22303f" opacity="0.92"/>
+        <rect x="300" y="86" width="12" height="12" rx="3" fill="#fff3c4" class="headlight"/>
+        <!-- chassis -->
+        <rect x="6" y="100" width="306" height="8" rx="3" fill="#2a3340"/>
+        <!-- wheels -->
+        <g class="wheel"><circle cx="64" cy="112" r="19" fill="#10151c"/><circle cx="64" cy="112" r="8" fill="#5a6577"/><g stroke="#2a3340" stroke-width="3"><line x1="64" y1="100" x2="64" y2="124"/><line x1="52" y1="112" x2="76" y2="112"/><line x1="55" y1="103" x2="73" y2="121"/><line x1="73" y1="103" x2="55" y2="121"/></g></g>
+        <g class="wheel"><circle cx="118" cy="112" r="19" fill="#10151c"/><circle cx="118" cy="112" r="8" fill="#5a6577"/><g stroke="#2a3340" stroke-width="3"><line x1="118" y1="100" x2="118" y2="124"/><line x1="106" y1="112" x2="130" y2="112"/><line x1="109" y1="103" x2="127" y2="121"/><line x1="127" y1="103" x2="109" y2="121"/></g></g>
+        <g class="wheel"><circle cx="268" cy="112" r="19" fill="#10151c"/><circle cx="268" cy="112" r="8" fill="#5a6577"/><g stroke="#2a3340" stroke-width="3"><line x1="268" y1="100" x2="268" y2="124"/><line x1="256" y1="112" x2="280" y2="112"/><line x1="259" y1="103" x2="277" y2="121"/><line x1="277" y1="103" x2="259" y2="121"/></g></g>
+        <!-- headlight beam -->
+        <polygon class="beam" points="312,90 360,74 360,108" fill="#fff3c4"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="hero-inner">
+    <div class="hero-photo reveal">
+      <img src="img/portrait.jpg" alt="Семенов Евгений Романович" />
+      <span class="hero-photo-ring"></span>
+    </div>
+    <div class="hero-copy">
+      <p class="eyebrow reveal" data-ru="Виртуальное резюме" data-en="Virtual résumé">Виртуальное резюме</p>
+      <h1 class="reveal"><span data-ru="Семенов Евгений" data-en="Evgeny">Семенов Евгений</span><br/>
+        <span class="lastname" data-ru="Романович" data-en="Semenov">Романович</span></h1>
+      <h2 class="hero-role reveal" data-ru="Менеджер по логистике и ВЭД"
+          data-en="Logistics &amp; Foreign-Trade Manager">Менеджер по логистике и ВЭД</h2>
+      <p class="hero-sub reveal"
+         data-ru="Начальник транспортного отдела · международные перевозки · таможенное оформление"
+         data-en="Head of transport dept · international freight · customs clearance">Начальник транспортного отдела · международные перевозки · таможенное оформление</p>
+      <div class="hero-chips reveal">
+        <span class="chip"><b>31+</b> <span data-ru="год опыта" data-en="years">год опыта</span></span>
+        <span class="chip"><b data-ru="ЕС·ЕАЭС·СНГ" data-en="EU·EAEU·CIS">ЕС·ЕАЭС·СНГ</b></span>
+        <span class="chip"><span data-ru="до" data-en="up to">до</span> <b>17</b> <span data-ru="чел. в команде" data-en="in team">чел. в команде</span></span>
+        <span class="chip"><b>English B2</b></span>
+      </div>
+      <div class="hero-cta reveal">
+        <a class="btn btn-primary" href="#contact" data-ru="Связаться" data-en="Get in touch">Связаться</a>
+        <a class="btn btn-outline" href="resume.pdf" download data-ru="Скачать резюме" data-en="Download résumé">Скачать резюме</a>
+      </div>
+    </div>
+  </div>
+  <a class="scroll-hint" href="#stats" aria-hidden="true"><span></span></a>
+</section>
+
+<!-- ============ KPI STATS ============ -->
+<section id="stats" class="stats">
+  <div class="wrap stats-grid">
+    <div class="stat reveal"><div class="stat-num" data-count="31" data-suffix="+">0</div>
+      <div class="stat-label" data-ru="лет в логистике" data-en="years in logistics">лет в логистике</div></div>
+    <div class="stat reveal"><div class="stat-num" data-count="8">0</div>
+      <div class="stat-label" data-ru="компаний" data-en="companies">компаний</div></div>
+    <div class="stat reveal"><div class="stat-num" data-prefix-ru="до " data-prefix-en="up to " data-count="17">0</div>
+      <div class="stat-label" data-ru="чел. в подчинении" data-en="direct reports">чел. в подчинении</div></div>
+    <div class="stat reveal"><div class="stat-num" data-count="14">0</div>
+      <div class="stat-label" data-ru="ед. автопарка" data-en="fleet vehicles">ед. автопарка</div></div>
+    <div class="stat reveal"><div class="stat-num" data-count="6">0</div>
+      <div class="stat-label" data-ru="направлений ВЭД" data-en="trade directions">направлений ВЭД</div></div>
+    <div class="stat reveal"><div class="stat-num stat-badge">B2</div>
+      <div class="stat-label" data-ru="английский" data-en="English">английский</div></div>
+  </div>
+</section>
+
+<!-- ============ PROFILE ============ -->
+<section id="profile" class="section profile">
+  <div class="wrap">
+    <p class="section-tag reveal" data-ru="01 — О специалисте" data-en="01 — Profile">01 — О специалисте</p>
+    <h2 class="section-title reveal" data-ru="Логист, который везёт результат"
+        data-en="A logistician who delivers results">Логист, который везёт результат</h2>
+    <div class="profile-grid">
+      <p class="lead reveal"
+         data-ru="Более 31 года в транспортной логистике и ВЭД. Строил отделы логистики с нуля, руководил автотранспортными предприятиями и командами до 17 человек, выстраивал международные цепочки поставок в Европу, Скандинавию, Калининград и Азию. Сильные стороны — таможенное оформление, снижение издержек, KPI и переговоры с контрагентами."
+         data-en="Over 31 years in transport logistics and foreign trade. Built logistics departments from scratch, ran trucking companies and teams of up to 17 people, and engineered international supply chains to Europe, Scandinavia, Kaliningrad and Asia. Core strengths: customs clearance, cost reduction, KPI management and contract negotiation.">
+        Более 31 года в транспортной логистике и ВЭД. Строил отделы логистики с нуля, руководил автотранспортными предприятиями и командами до 17 человек, выстраивал международные цепочки поставок в Европу, Скандинавию, Калининград и Азию. Сильные стороны — таможенное оформление, снижение издержек, KPI и переговоры с контрагентами.
+      </p>
+      <ul class="strength-list">
+        <li class="reveal"><span class="dot"></span><span data-ru="Создание отдела логистики производственного предприятия с нуля" data-en="Built a manufacturer's logistics department from the ground up">Создание отдела логистики производственного предприятия с нуля</span></li>
+        <li class="reveal"><span class="dot"></span><span data-ru="Полный цикл ВЭД и таможенного оформления экспорта" data-en="Full FEA cycle and customs clearance of exports">Полный цикл ВЭД и таможенного оформления экспорта</span></li>
+        <li class="reveal"><span class="dot"></span><span data-ru="Управление автопарком, KPI и системой мотивации" data-en="Fleet management, KPIs and motivation systems">Управление автопарком, KPI и системой мотивации</span></li>
+        <li class="reveal"><span class="dot"></span><span data-ru="Снижение расходов на транспортировку и хранение" data-en="Cutting transport and storage costs">Снижение расходов на транспортировку и хранение</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SKILLS ============ -->
+<section id="skills" class="section skills">
+  <div class="wrap">
+    <p class="section-tag reveal" data-ru="02 — Компетенции" data-en="02 — Skills">02 — Компетенции</p>
+    <h2 class="section-title reveal" data-ru="Чем владею на уровне эксперта"
+        data-en="Expert-level competencies">Чем владею на уровне эксперта</h2>
+    <div class="skills-grid">
+
+      <div class="skill-card reveal">
+        <h3 data-ru="ВЭД и таможня" data-en="Foreign trade &amp; customs">ВЭД и таможня</h3>
+        <div class="bar" data-pct="95"><span data-ru="Таможенное оформление, расчёт платежей" data-en="Customs clearance, duty calculation">Таможенное оформление, расчёт платежей</span></div>
+        <div class="bar" data-pct="92"><span data-ru="Контроль таможенной стоимости" data-en="Customs-value control">Контроль таможенной стоимости</span></div>
+        <div class="bar" data-pct="88"><span data-ru="Сертификация, ТПП, РЭЦ" data-en="Certification, Chamber of Commerce, REC">Сертификация, ТПП, РЭЦ</span></div>
+      </div>
+
+      <div class="skill-card reveal">
+        <h3 data-ru="Международная логистика" data-en="International logistics">Международная логистика</h3>
+        <div class="bar" data-pct="96"><span data-ru="Международные автоперевозки" data-en="International road freight">Международные автоперевозки</span></div>
+        <div class="bar" data-pct="90"><span data-ru="Мультимодальные перевозки" data-en="Multimodal transport">Мультимодальные перевозки</span></div>
+        <div class="bar" data-pct="93"><span data-ru="Оптимизация маршрутов и расходов" data-en="Route &amp; cost optimization">Оптимизация маршрутов и расходов</span></div>
+      </div>
+
+      <div class="skill-card reveal">
+        <h3 data-ru="Управление" data-en="Management">Управление</h3>
+        <div class="bar" data-pct="92"><span data-ru="Руководство отделом (до 17 чел.)" data-en="Department leadership (up to 17)">Руководство отделом (до 17 чел.)</span></div>
+        <div class="bar" data-pct="88"><span data-ru="Бюджетирование и KPI" data-en="Budgeting and KPIs">Бюджетирование и KPI</span></div>
+        <div class="bar" data-pct="90"><span data-ru="Переговоры и работа с клиентами" data-en="Negotiations &amp; client relations">Переговоры и работа с клиентами</span></div>
+      </div>
+
+      <div class="skill-card reveal">
+        <h3 data-ru="Системы и IT" data-en="Systems &amp; IT">Системы и IT</h3>
+        <div class="bar" data-pct="85"><span>1С: Предприятие 8 (КА-2)</span></div>
+        <div class="bar" data-pct="80"><span>Bitrix24 · Transporeon</span></div>
+        <div class="bar" data-pct="82"><span data-ru="Банк-клиент, валютные операции" data-en="Bank-client, currency operations">Банк-клиент, валютные операции</span></div>
+      </div>
+
+    </div>
+    <div class="lang-row">
+      <span class="lang-pill"><b>RU</b> <span data-ru="родной" data-en="native">родной</span></span>
+      <span class="lang-pill"><b>EN</b> B2 — <span data-ru="средне-продвинутый" data-en="upper-intermediate">средне-продвинутый</span></span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EXPERIENCE / TIMELINE ============ -->
+<section id="experience" class="section experience has-photo" data-bg="euro-route">
+  <div class="exp-overlay"></div>
+  <div class="wrap">
+    <p class="section-tag reveal" data-ru="03 — Карьерный маршрут" data-en="03 — Career route">03 — Карьерный маршрут</p>
+    <h2 class="section-title reveal" data-ru="31 год в пути" data-en="31 years on the road">31 год в пути</h2>
+
+    <div class="timeline">
+      <div class="tl-road" aria-hidden="true">
+        <div class="tl-truck">
+          <svg viewBox="0 0 60 40"><rect x="2" y="8" width="34" height="20" rx="3" fill="#f4f6fb" stroke="#9aa6bb"/><path d="M37 12 h12 l6 8 v8 h-18 z" fill="#ffc94d" stroke="#cf8a12"/><circle cx="14" cy="30" r="5" fill="#10151c"/><circle cx="44" cy="30" r="5" fill="#10151c"/></svg>
+        </div>
+      </div>
+
+      <!-- 1 -->
+      <article class="tl-item reveal">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-period"><span class="tl-when" data-ru="Фев 2024 — наст. время" data-en="Feb 2024 — present">Фев 2024 — наст. время</span><span class="tl-dur" data-ru="2 г 5 мес" data-en="2 yr 5 mo">2 г 5 мес</span></div>
+          <h3 class="tl-company">ЛИГНОГУМАТ</h3>
+          <p class="tl-role" data-ru="Менеджер по логистике и ВЭД" data-en="Logistics &amp; FEA Manager">Менеджер по логистике и ВЭД</p>
+          <ul class="tl-points">
+            <li data-ru="Экспорт продукции АПК в ЕС, ЕАЭС и СНГ — полный цикл ВЭД" data-en="Export of agri-products to the EU, EAEU and CIS — full FEA cycle">Экспорт продукции АПК в ЕС, ЕАЭС и СНГ — полный цикл ВЭД</li>
+            <li data-ru="Таможенное оформление, расчёт платежей, сертификаты происхождения, контроль таможенной стоимости" data-en="Customs clearance, duty calculation, certificates of origin, customs-value control">Таможенное оформление, расчёт платежей, сертификаты происхождения, контроль таможенной стоимости</li>
+            <li data-ru="Снижение расходов на транспортировку и ответственное хранение" data-en="Reducing transport and bonded-storage costs">Снижение расходов на транспортировку и ответственное хранение</li>
+            <li data-ru="Взаимодействие с ТПП Санкт-Петербурга и РЭЦ · 1С 8.2 КА-2, Bitrix24" data-en="Liaison with the St. Petersburg Chamber of Commerce and REC · 1C 8.2, Bitrix24">Взаимодействие с ТПП Санкт-Петербурга и РЭЦ · 1С 8.2 КА-2, Bitrix24</li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- 2 -->
+      <article class="tl-item reveal">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-period"><span class="tl-when" data-ru="Окт 2019 — Фев 2024" data-en="Oct 2019 — Feb 2024">Окт 2019 — Фев 2024</span><span class="tl-dur" data-ru="4 г 5 мес" data-en="4 yr 5 mo">4 г 5 мес</span></div>
+          <h3 class="tl-company">ВЕЗУ.РУ</h3>
+          <p class="tl-role" data-ru="Специалист по международным перевозкам" data-en="International Transport Specialist">Специалист по международным перевозкам</p>
+          <ul class="tl-points">
+            <li data-ru="Организация международных рейсов (тенты, рефрижераторы): Западная Европа, Калининград, Азия" data-en="International routes (tilt, reefer): Western Europe, Kaliningrad, Asia">Организация международных рейсов (тенты, рефрижераторы): Западная Европа, Калининград, Азия</li>
+            <li data-ru="Действующее удостоверение специалиста по МАП" data-en="Valid international-haulage (MAP) specialist certificate">Действующее удостоверение специалиста по МАП</li>
+            <li data-ru="Работа с таможней и брокерами, таможенное оформление" data-en="Customs and broker coordination, customs clearance">Работа с таможней и брокерами, таможенное оформление</li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- 3 -->
+      <article class="tl-item reveal">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-period"><span class="tl-when" data-ru="Дек 2012 — Окт 2019" data-en="Dec 2012 — Oct 2019">Дек 2012 — Окт 2019</span><span class="tl-dur" data-ru="6 л 11 мес" data-en="6 yr 11 mo">6 л 11 мес</span></div>
+          <h3 class="tl-company">AsstrA Cargo <span class="tl-tag" data-ru="член АСМАП" data-en="ASMAP member">член АСМАП</span></h3>
+          <p class="tl-role" data-ru="Руководитель обособленного подразделения, Санкт-Петербург" data-en="Head of the St. Petersburg division">Руководитель обособленного подразделения, Санкт-Петербург</p>
+          <ul class="tl-points">
+            <li data-ru="Руководство автотранспортным предприятием — 17 человек в прямом подчинении" data-en="Led the trucking unit — 17 direct reports">Руководство автотранспортным предприятием — 17 человек в прямом подчинении</li>
+            <li data-ru="Анализ эффективности собственного парка (14 ед.), система KPI" data-en="Own-fleet efficiency analysis (14 vehicles), KPI system">Анализ эффективности собственного парка (14 ед.), система KPI</li>
+            <li data-ru="Развитие продаж спецперевозок (опасные грузы) в международном направлении" data-en="Grew international special-cargo (ADR / dangerous-goods) sales">Развитие продаж спецперевозок (опасные грузы) в международном направлении</li>
+            <li data-ru="Взаимодействие с МРЭО, АСМАП, ФНС · ТО автопарка · мотивация отдела" data-en="Liaison with MREO, ASMAP, tax authority · fleet maintenance · team motivation">Взаимодействие с МРЭО, АСМАП, ФНС · ТО автопарка · мотивация отдела</li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- 4 -->
+      <article class="tl-item reveal">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-period"><span class="tl-when" data-ru="Июл 2004 — Дек 2012" data-en="Jul 2004 — Dec 2012">Июл 2004 — Дек 2012</span><span class="tl-dur" data-ru="8 л 6 мес" data-en="8 yr 6 mo">8 л 6 мес</span></div>
+          <h3 class="tl-company">Flame Line Ltd.</h3>
+          <p class="tl-role" data-ru="Руководитель отдела логистики" data-en="Head of Logistics Department">Руководитель отдела логистики</p>
+          <ul class="tl-points">
+            <li data-ru="Руководство автотранспортной и ТЭК-компанией, 12 человек · международные перевозки" data-en="Ran a trucking & freight-forwarding company, 12 staff · international transport">Руководство автотранспортной и ТЭК-компанией, 12 человек · международные перевозки</li>
+            <li data-ru="Стратегическое планирование, бюджеты продаж и расходов, KPI" data-en="Strategic planning, sales & cost budgets, KPI">Стратегическое планирование, бюджеты продаж и расходов, KPI</li>
+            <li data-ru="Контроль дебиторской задолженности, расширение клиентской базы" data-en="Receivables control, client-base expansion">Контроль дебиторской задолженности, расширение клиентской базы</li>
+            <li data-ru="Прямой контроль автохозяйства (8 машин), страхование, АСМАП" data-en="Direct fleet control (8 trucks), insurance, ASMAP">Прямой контроль автохозяйства (8 машин), страхование, АСМАП</li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- 5 -->
+      <article class="tl-item reveal">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-period"><span class="tl-when" data-ru="Ноя 2000 — Июн 2004" data-en="Nov 2000 — Jun 2004">Ноя 2000 — Июн 2004</span><span class="tl-dur" data-ru="3 г 8 мес" data-en="3 yr 8 mo">3 г 8 мес</span></div>
+          <h3 class="tl-company" data-ru="Автомобиль. Ремонт. Перевозки" data-en="Avtomobil. Remont. Perevozki">Автомобиль. Ремонт. Перевозки <span class="tl-tag" data-ru="член АСМАП" data-en="ASMAP member">член АСМАП</span></h3>
+          <p class="tl-role" data-ru="Менеджер отдела логистики" data-en="Logistics Department Manager">Менеджер отдела логистики</p>
+          <ul class="tl-points">
+            <li data-ru="Перевозки из Западной Европы и Скандинавии, таможенное оформление" data-en="Inbound transport from Western Europe & Scandinavia, customs clearance">Перевозки из Западной Европы и Скандинавии, таможенное оформление</li>
+            <li data-ru="Контроль сроков доставки и оформления, оптимизация расходов" data-en="Delivery & clearance lead-time control, cost optimization">Контроль сроков доставки и оформления, оптимизация расходов</li>
+            <li data-ru="Формирование и организация транспортного отдела с нуля" data-en="Built and organized the transport department from scratch">Формирование и организация транспортного отдела с нуля</li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- 6 -->
+      <article class="tl-item reveal">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-period"><span class="tl-when" data-ru="Дек 1999 — Окт 2000" data-en="Dec 1999 — Oct 2000">Дек 1999 — Окт 2000</span><span class="tl-dur" data-ru="11 мес" data-en="11 mo">11 мес</span></div>
+          <h3 class="tl-company" data-ru="Азимут +" data-en="Azimut +">Азимут +</h3>
+          <p class="tl-role" data-ru="Менеджер экспедиторского отдела" data-en="Freight-Forwarding Manager">Менеджер экспедиторского отдела</p>
+          <ul class="tl-points">
+            <li data-ru="Логистические цепочки и мультимодальные перевозки" data-en="Logistics chains and multimodal transport">Логистические цепочки и мультимодальные перевозки</li>
+            <li data-ru="Оптимальные схемы перевозок, минимизация транспортных расходов" data-en="Optimal routing schemes, transport-cost minimization">Оптимальные схемы перевозок, минимизация транспортных расходов</li>
+            <li data-ru="Контроль взаиморасчётов, организация экспортных операций" data-en="Settlement control, export operations">Контроль взаиморасчётов, организация экспортных операций</li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- 7 -->
+      <article class="tl-item reveal tl-compact">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-period"><span class="tl-when" data-ru="Июл 1999 — Дек 1999" data-en="Jul 1999 — Dec 1999">Июл 1999 — Дек 1999</span><span class="tl-dur" data-ru="6 мес" data-en="6 mo">6 мес</span></div>
+          <h3 class="tl-company" data-ru="Русбартер" data-en="Rusbarter">Русбартер</h3>
+          <p class="tl-role" data-ru="Специалист по маркетингу" data-en="Marketing Specialist">Специалист по маркетингу</p>
+          <ul class="tl-points">
+            <li data-ru="Работа с клиентской базой: переговоры, договоры, документооборот" data-en="Client-base work: negotiations, contracts, document flow">Работа с клиентской базой: переговоры, договоры, документооборот</li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- 8 -->
+      <article class="tl-item reveal tl-compact">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-period"><span class="tl-when" data-ru="Дек 1994 — Июн 1999" data-en="Dec 1994 — Jun 1999">Дек 1994 — Июн 1999</span><span class="tl-dur" data-ru="4 г 7 мес" data-en="4 yr 7 mo">4 г 7 мес</span></div>
+          <h3 class="tl-company" data-ru="Служба занятости СПб" data-en="State Employment Service, St. Petersburg">Служба занятости СПб</h3>
+          <p class="tl-role" data-ru="Ведущий специалист отдела занятости" data-en="Lead Specialist, Employment Dept.">Ведущий специалист отдела занятости</p>
+          <ul class="tl-points">
+            <li data-ru="Подбор персонала для работодателей, работа с соискателями" data-en="Recruitment for employers, work with job seekers">Подбор персонала для работодателей, работа с соискателями</li>
+          </ul>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ GEOGRAPHY / ROUTES ============ -->
+<section id="geography" class="section geography">
+  <div class="wrap">
+    <p class="section-tag reveal" data-ru="04 — География перевозок" data-en="04 — Coverage map">04 — География перевозок</p>
+    <h2 class="section-title reveal" data-ru="Маршруты, которые я выстраивал"
+        data-en="Routes I have built">Маршруты, которые я выстраивал</h2>
+
+    <div class="map-card reveal">
+      <svg class="route-map" viewBox="0 0 820 460" role="img" aria-label="routes map">
+        <!-- abstract land -->
+        <rect x="0" y="0" width="820" height="460" fill="none"/>
+        <path d="M40 250 Q120 160 240 180 T460 150 Q560 130 700 170 T800 210 L800 420 L40 420 Z" fill="#161d27" opacity="0.65"/>
+        <path d="M60 300 Q200 260 360 290 T780 280" fill="none" stroke="#222c39" stroke-width="2" stroke-dasharray="3 7"/>
+
+        <!-- routes (from SPb hub) -->
+        <g class="routes" fill="none" stroke-width="3" stroke-linecap="round">
+          <path id="r1" class="route" d="M430 190 C 330 180, 210 200, 120 240" stroke="#60a5fa"/>
+          <path id="r2" class="route" d="M430 190 C 360 130, 300 100, 230 95"  stroke="#34d399"/>
+          <path id="r3" class="route" d="M430 190 C 380 210, 330 250, 300 300" stroke="#a78bfa"/>
+          <path id="r4" class="route" d="M430 190 C 560 170, 690 200, 770 260" stroke="#ffb627"/>
+          <path id="r5" class="route" d="M430 190 C 470 250, 520 320, 560 380" stroke="#f472b6"/>
+        </g>
+
+        <!-- moving trucks along routes -->
+        <g class="route-dots">
+          <circle r="5" fill="#60a5fa"><animateMotion dur="3.6s" begin="0.4s" repeatCount="indefinite"><mpath href="#r1"/></animateMotion></circle>
+          <circle r="5" fill="#34d399"><animateMotion dur="3.2s" begin="0.9s" repeatCount="indefinite"><mpath href="#r2"/></animateMotion></circle>
+          <circle r="5" fill="#a78bfa"><animateMotion dur="3.0s" begin="1.3s" repeatCount="indefinite"><mpath href="#r3"/></animateMotion></circle>
+          <circle r="5" fill="#ffb627"><animateMotion dur="4.2s" begin="0.2s" repeatCount="indefinite"><mpath href="#r4"/></animateMotion></circle>
+          <circle r="5" fill="#f472b6"><animateMotion dur="3.8s" begin="1.6s" repeatCount="indefinite"><mpath href="#r5"/></animateMotion></circle>
+        </g>
+
+        <!-- endpoints -->
+        <g class="poi" font-family="Manrope" font-size="14" fill="#cdd6e3">
+          <g><circle cx="120" cy="240" r="5" fill="#60a5fa"/><text x="110" y="262" text-anchor="middle" data-ru="Зап. Европа" data-en="W. Europe">Зап. Европа</text></g>
+          <g><circle cx="230" cy="95" r="5" fill="#34d399"/><text x="230" y="80" text-anchor="middle" data-ru="Скандинавия" data-en="Scandinavia">Скандинавия</text></g>
+          <g><circle cx="300" cy="300" r="5" fill="#a78bfa"/><text x="300" y="322" text-anchor="middle" data-ru="Калининград" data-en="Kaliningrad">Калининград</text></g>
+          <g><circle cx="770" cy="260" r="5" fill="#ffb627"/><text x="770" y="282" text-anchor="middle" data-ru="Азия" data-en="Asia">Азия</text></g>
+          <g><circle cx="560" cy="380" r="5" fill="#f472b6"/><text x="560" y="402" text-anchor="middle" data-ru="ЕАЭС / СНГ" data-en="EAEU / CIS">ЕАЭС / СНГ</text></g>
+        </g>
+
+        <!-- hub: Saint Petersburg -->
+        <g class="hub">
+          <circle cx="430" cy="190" r="12" fill="none" stroke="#ffc94d" stroke-width="2" class="hub-pulse"/>
+          <circle cx="430" cy="190" r="6" fill="#ffc94d"/>
+          <text x="430" y="172" text-anchor="middle" font-family="Oswald" font-size="16" fill="#fff" data-ru="Санкт-Петербург" data-en="St. Petersburg">Санкт-Петербург</text>
+        </g>
+      </svg>
+      <div class="map-legend">
+        <span data-ru="🚚 Авто" data-en="🚚 Road">🚚 Авто</span>
+        <span data-ru="🚆 Ж/д" data-en="🚆 Rail">🚆 Ж/д</span>
+        <span data-ru="🚢 Море" data-en="🚢 Sea">🚢 Море</span>
+        <span data-ru="мультимодальные цепочки" data-en="multimodal chains">мультимодальные цепочки</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EDUCATION & CERTS ============ -->
+<section id="education" class="section education">
+  <div class="wrap">
+    <p class="section-tag reveal" data-ru="05 — Образование и допуски" data-en="05 — Education &amp; credentials">05 — Образование и допуски</p>
+    <div class="edu-grid">
+      <div class="edu-card reveal">
+        <div class="edu-ico">🎓</div>
+        <h3 data-ru="Высшее образование" data-en="Higher education">Высшее образование</h3>
+        <p class="edu-org" data-ru="СПБГУПС — Петербургский государственный университет путей сообщения"
+           data-en="PGUPS — St. Petersburg State Transport University">СПБГУПС — Петербургский государственный университет путей сообщения</p>
+        <p class="edu-meta" data-ru="Механический факультет · 1994" data-en="Mechanical faculty · 1994">Механический факультет · 1994</p>
+      </div>
+      <div class="edu-card reveal">
+        <div class="edu-ico">📋</div>
+        <h3 data-ru="Профессиональные допуски" data-en="Professional credentials">Профессиональные допуски</h3>
+        <ul>
+          <li data-ru="Удостоверение специалиста по МАП (действующее)" data-en="International-haulage (MAP) specialist certificate (valid)">Удостоверение специалиста по МАП (действующее)</li>
+          <li data-ru="Опыт в предприятиях — членах АСМАП" data-en="Experience at ASMAP-member companies">Опыт в предприятиях — членах АСМАП</li>
+          <li data-ru="Специалист по охране труда, аттестация рабочих мест" data-en="Occupational-safety specialist, workplace certification">Специалист по охране труда, аттестация рабочих мест</li>
+        </ul>
+      </div>
+      <div class="edu-card reveal">
+        <div class="edu-ico">🚗</div>
+        <h3 data-ru="Мобильность" data-en="Mobility">Мобильность</h3>
+        <ul>
+          <li data-ru="Права категории B · собственный автомобиль" data-en="Category B licence · own car">Права категории B · собственный автомобиль</li>
+          <li data-ru="Готов к командировкам" data-en="Ready for business trips">Готов к командировкам</li>
+          <li data-ru="Санкт-Петербург, на месте работодателя" data-en="St. Petersburg, on-site">Санкт-Петербург, на месте работодателя</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT / CTA ============ -->
+<section id="contact" class="section contact has-photo" data-bg="container-port">
+  <div class="contact-overlay"></div>
+  <div class="wrap contact-inner reveal">
+    <h2 class="contact-title" data-ru="Готов усилить вашу логистику"
+        data-en="Ready to strengthen your logistics">Готов усилить вашу логистику</h2>
+    <p class="contact-sub" data-ru="Открыт к предложениям: логистика, ВЭД, руководство транспортным отделом."
+       data-en="Open to offers: logistics, foreign trade, transport-department leadership.">Открыт к предложениям: логистика, ВЭД, руководство транспортным отделом.</p>
+
+    <div class="contact-cards">
+      <button class="contact-card reveal-btn" id="reveal-phone" type="button">
+        <span class="cc-ico">📞</span>
+        <span class="cc-label" data-ru="Показать телефон" data-en="Show phone">Показать телефон</span>
+      </button>
+      <button class="contact-card reveal-btn" id="reveal-email" type="button">
+        <span class="cc-ico">✉️</span>
+        <span class="cc-label" data-ru="Показать e-mail" data-en="Show e-mail">Показать e-mail</span>
+      </button>
+      <a class="contact-card" href="resume.pdf" download>
+        <span class="cc-ico">📄</span>
+        <span class="cc-label" data-ru="Скачать резюме (PDF)" data-en="Download résumé (PDF)">Скачать резюме (PDF)</span>
+      </a>
+    </div>
+    <p class="contact-note" data-ru="📍 Санкт-Петербург · Гражданство РФ · Полная занятость"
+       data-en="📍 St. Petersburg · RF citizenship · Full-time">📍 Санкт-Петербург · Гражданство РФ · Полная занятость</p>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <span>© <span id="year"></span> <span data-ru="Семенов Евгений Романович" data-en="Evgeny R. Semenov">Семенов Евгений Романович</span></span>
+    <span class="footer-made" data-ru="Виртуальное резюме" data-en="Virtual résumé">Виртуальное резюме</span>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>
